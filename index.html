@@ -41,21 +41,6 @@
             </div>
           </div>
 
-          <script>
-            if (localStorage.getItem("name") == null) {
-              const name = prompt("enter your name", "new user");
-              if (name == null || name == "") {
-                document.querySelector(".user").innerHTML = "new user";
-              } else {
-                localStorage.setItem("name", name);
-                document.querySelector(".user").innerHTML = name;
-              }
-            } else {
-              const newName = localStorage.getItem("name");
-              document.querySelector(".user").innerHTML = newName;
-            }
-          </script>
-
           <div class="lower-nav">
             <ul class="new-ul">
               <li class="day selected-task">
@@ -76,16 +61,6 @@
           </div>
           <div class="empty"></div>
           <!-- funny.. no? -->
-          <div class="lists">
-            <ul class="lists-items">
-              <li class="list-item selected-list" id="item-0">Main list</li>
-              <li class="create-list">
-                <img
-                  src="https://img.icons8.com/emoji/20/000000/plus-emoji.png"
-                />Create List
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -173,6 +148,6 @@
       document.getElementById("date").innerHTML = `${day}, ${month} ${day2}`;
     </script>
 
-    <script src="menu.js"></script>
+    <script src="functions.js"></script>
   </body>
 </html>
