@@ -1,109 +1,59 @@
 "use strict";
 
-const createTodo = (content, cssClass) => {
+const createTodo = () => {
+  const body = document.querySelector(".items");
+  const createButton = document.getElementById("create");
+
+  // input todo
   const textarea = buildElement("input", "task");
   const todoContainer = buildElement("div", "todo-item");
+  todoContainer.appendChild(textarea);
+  body.insertBefore(todoContainer, createButton);
+
+  // done button
   const tickButton = buildElement("button", "tick-icon");
+  const tickImg = buildElement("img", "");
+  tickImg.src =
+  "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
   todoContainer.appendChild(tickButton);
+  tickButton.appendChild(tickImg);
   
+  //delete button
+  const deleteButton = buildElement("button", "delete-icon");
+  const deleteImg = buildElement("img", "");
+  deleteImg.src = "https://img.icons8.com/color/23/000000/cancel--v3.png";
+  todoContainer.appendChild(deleteButton);
+  deleteButton.appendChild(deleteImg);
+
+  //edit button
+  const editButton = buildElement("button", "edit-icon");
+  const editImg = buildElement("img", "");
+  editImg.src = "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
+  todoContainer.appendChild(editButton);
+  editButton.appendChild(editImg);
+
+  //disabling text edit when focus out
+  textarea.focus();
+  textarea.addEventListener("focusout", disableButton);
+}
+
+function disableButton(event) {
+  const target = event.target;
+  target.readOnly = true;
+  if (target.value == "" || target.value == null) {
+    target.value = "new task";
+  }
 }
 
 const buildElement = (element, cssClass) => {
   const newElement = document.createElement(element);
-  newElement.classList.add(cssClass);
+  if(cssClass)
+      newElement.classList.add(cssClass);
   return newElement;
 }
 
-const create = document.querySelector(".create");
-create.addEventListener("click", createTodo);
-
-
-// user name ..
-if (localStorage.getItem("name") == null) {
-  const name = prompt("enter your name", "new user");
-  if (name == null || name == "") {
-    document.querySelector(".user").innerHTML = "new user";
-  } else {
-    localStorage.setItem("name", name);
-    document.querySelector(".user").innerHTML = name;
-  }
-} else {
-  const newName = localStorage.getItem("name");
-  document.querySelector(".user").innerHTML = newName;
-}
-
-
-// const createNewTask = () => {
-//   const ses = sessionStorage.getItem("current div");
-//   const itemCount = document.querySelector(`#${ses} .items`).childNodes.length;
-//   const main = document.querySelector(`#${ses} .items`);
-//   const create = document.querySelector(`#${ses} #create`);
-//   const textarea = document.createElement("input");
-//   textarea.classList.add("task");
-//   const div = document.createElement("div");
-//   div.classList.add("todo-item");
-//   div.setAttribute("id", `item-${itemCount - 1}`);
-//   main.insertBefore(div, create);
-
-//   const tickButton = document.createElement("Button");
-//   const tickImg = document.createElement("img");
-//   tickImg.src =
-//     "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
-//   tickButton.classList.add("tick-icon");
-//   div.appendChild(tickButton);
-//   tickButton.appendChild(tickImg);
-
-//   const delButton = document.createElement("button");
-//   const delImg = document.createElement("img");
-//   delImg.src = "https://img.icons8.com/color/23/000000/cancel--v3.png";
-//   delButton.classList.add("delete-icon");
-//   delButton.appendChild(delImg);
-//   div.appendChild(delButton);
-
-//   const editButton = document.createElement("button");
-//   const editImg = document.createElement("img");
-//   editImg.src =
-//     "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
-//   editButton.classList.add("edit-icon");
-//   editButton.appendChild(editImg);
-//   div.appendChild(editButton);
-
-//   const starButton = document.createElement("button");
-//   const star = document.createElement("p");
-//   star.innerHTML = "&#9733;";
-//   star.classList.add("important");
-//   starButton.classList.add("important-button");
-//   starButton.appendChild(star);
-//   div.appendChild(starButton);
-
-//   div.appendChild(textarea);
-//   textarea.focus();
-//   textarea.addEventListener("focusout", disableButton);
-// };
-
-// const create = document.querySelector(".create");
-// create.addEventListener("click", createNewTask);
-
-// function disableButton(event) {
-//   const target = event.target;
-//   target.readOnly = true;
-//   if (target.value == "" || target.value == null) {
-//     target.value = "new task";
-//   }
-// }
-// // ^^^^^^^^^^^^^ up there... to make new tasks no? :D ^^^^^^^^^^
-
-// const userChange = document.querySelector(".user");
-// userChange.addEventListener("click", () => {
-//   const name = prompt("enter your name", localStorage.getItem("name"));
-//   if (name != null || name == "") {
-//     localStorage.clear();
-//     localStorage.setItem("name", name);
-//     document.querySelector(".user").innerHTML = name;
-//   } else {
-//     document.querySelector(".user").innerHTML = localStorage.getItem("name");
-//   }
-// });
+const createNewTodo = document.querySelector(".create");
+createNewTodo.addEventListener("click", createTodo);
 
 // // now lets do something more fun down here!
 // //lets make these tasks buttons work :D so tick will... check it green? important yellow? ok
