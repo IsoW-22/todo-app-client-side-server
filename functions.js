@@ -1,15 +1,15 @@
 "use strict";
 
-const createTodo = () => {
+const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const body = document.querySelector(".items");
   const createButton = document.getElementById("create");
   const counter = body.childNodes.length - 5;
 
   // input todo
   const todoContainer = buildElement("div", "todo-item");
-  todoContainer.setAttribute("id", counter);
+  todoContainer.id = todoId ? todoId : `item-${counter}`;
   const textarea = buildElement("input", "task");
-  textarea.value = "new todo";
+  textarea.value = todoText ? todoText : "new todo";
   textarea.readOnly = true;
   textarea.addEventListener("focusout", () => {
     textarea.readOnly = true;
@@ -18,12 +18,15 @@ const createTodo = () => {
   body.insertBefore(todoContainer, createButton);
 
   // done button
-  const tickButton = buildElement("button", "tick-icon");
-  const tickImg = buildElement("img");
-  tickImg.src =
+  const doneButton = buildElement("button", "tick-icon");
+  const doneImg = buildElement("img");
+  doneImg.src =
   "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
-  todoContainer.appendChild(tickButton);
-  tickButton.appendChild(tickImg);
+  todoContainer.appendChild(doneButton);
+  doneButton.appendChild(doneImg);
+  doneButton.addEventListener("click", setAsDone = (event) => {
+    
+  });
   
   //delete button
   const deleteButton = buildElement("button", "delete-icon");
@@ -40,19 +43,24 @@ const createTodo = () => {
   editButton.appendChild(editImg);
 
   //adding client-side database
-  const newTodo = {
-    value: textarea.value,
-    done: false,
-    id: counter
-  }
-  if(localStorage.getItem("items")){
-    const localStorageItems = JSON.parse(localStorage.getItem("items"));
-    localStorageItems.push(newTodo);
-    localStorage.setItem("items", JSON.stringify(localStorageItems));
+  if (oldTodo) {
+    return;
   }
   else {
-    const jsonNewTodo = JSON.stringify(newTodo);
-    localStorage.setItem("items", `[${jsonNewTodo}]`);
+    const newTodo = {
+      value: textarea.value,
+      done: false,
+      id: `item-${counter}`
+    }
+    if(localStorage.getItem("items")){
+      const localStorageItems = JSON.parse(localStorage.getItem("items"));
+      localStorageItems.push(newTodo);
+      localStorage.setItem("items", JSON.stringify(localStorageItems));
+    }
+    else {
+      const jsonNewTodo = JSON.stringify(newTodo);
+      localStorage.setItem("items", `[${jsonNewTodo}]`);
+    }
   }
 }
 
@@ -73,6 +81,10 @@ const buildElement = (element, cssClass) => {
 
 const createNewTodo = document.querySelector(".create");
 createNewTodo.addEventListener("click", createTodo);
+
+const setAsDone = (event) => {
+  const {target} = event.target;
+}
 
 // function allButtons(event) {
 //   const { target } = event;
