@@ -9,9 +9,12 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const todoContainer = buildElement("div", "todo-item");
   todoContainer.id = todoId ? todoId : `item-${counter}`;
   const textarea = buildElement("input", "task");
-  textarea.value = todoText ? todoText : "new todo";
+  textarea.value = todoText ? todoText : "new task";
   textarea.readOnly = true;
   textarea.addEventListener("focusout", () => {
+    if(textarea.value === "" || textarea.value === null){
+      textarea.value = "new task";
+    }
     textarea.readOnly = true;
   });
   todoContainer.appendChild(textarea);
@@ -33,9 +36,24 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
       let allTodos = JSON.parse(localStorage.getItem("items"));
       allTodos.find(element => {
         if(element.id === parentID) {
-
+          element.done = false;
         }
-      })
+      });
+      allTodos = JSON.stringify(allTodos);
+      localStorage.setItem("items", allTodos);
+      parent.querySelector(".edit-icon").disabled = false;
+    }
+    else {
+      parent.classList.toggle("done-item");
+      let allTodos = JSON.parse(localStorage.getItem("items"));
+      allTodos.find(element => {
+        if(element.id === parentID) {
+          element.done = true;
+        }
+      });
+      allTodos = JSON.stringify(allTodos);
+      localStorage.setItem("items", allTodos);
+      parent.querySelector(".edit-icon").disabled = true;
     }
   });
   
@@ -61,6 +79,13 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   editImg.src = "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
   todoContainer.appendChild(editButton);
   editButton.appendChild(editImg);
+  editButton.addEventListener("click", (event) => {
+    const {target} = event;
+    const input = target.parentNode.querySelector(".task");
+    input.value = "";
+    input.readOnly = false;
+    input.focus();
+  })
 
   //adding client-side database
   // if (oldTodo) {
