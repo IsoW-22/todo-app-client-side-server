@@ -3,14 +3,13 @@
 const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const body = document.querySelector(".items");
   const createButton = document.getElementById("create");
-  const counter = body.childNodes.length - 5;
+  const counter = body.childNodes.length - 3;
 
   // input todo
   const todoContainer = buildElement("div", "todo-item");
   todoContainer.id = todoId ? todoId : `item-${counter}`;
   const textarea = buildElement("input", "task");
   textarea.value = todoText ? todoText : "new todo";
-  console.log(todoText);
   textarea.readOnly = true;
   textarea.addEventListener("focusout", () => {
     textarea.readOnly = true;
@@ -25,7 +24,20 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
   todoContainer.appendChild(doneButton);
   doneButton.appendChild(doneImg);
-  doneButton.addEventListener("click", sss);
+  doneButton.addEventListener("click", (event) => {
+    const {target} = event;
+    const parent = target.parentNode;
+    const parentID = parent.id;
+    if(parent.classList.contains("done-item")){
+      parent.classList.toggle("done-item");
+      let allTodos = JSON.parse(localStorage.getItem("items"));
+      allTodos.find(element => {
+        if(element.id === parentID) {
+
+        }
+      })
+    }
+  });
   
   //delete button
   const deleteButton = buildElement("button", "delete-icon");
@@ -35,14 +47,11 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   deleteButton.appendChild(deleteImg);
   deleteButton.addEventListener("click", (event) => {
     const {target} = event;
-    const targeID = target.parentNode.id;
+    const targetID = target.parentNode.id;
     let items = JSON.parse(localStorage.getItem("items"));
-    items.find(element => {
-      element.id === targeID;
-      items.pop(element);
-    });
-    items = JSON.stringify(items);
-    localStorage.setItem("items", items);
+    let filtered = items.filter(function(el) { return el.id != targetID; });
+    filtered = JSON.stringify(filtered);
+    localStorage.setItem("items", filtered);
     target.parentNode.remove();
   });
 
@@ -78,7 +87,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
 function changeContent(event) {
   const target = event.target;
   target.readOnly = true;
-  if (target.value == "" || target.value == null) {
+  if (target.value === "" || target.value === null) {
     target.value = "new task";
   }
 }
@@ -94,10 +103,6 @@ const createNewTodo = document.querySelector(".create");
 createNewTodo.addEventListener("click", () => {
   createTodo();
 });
-
-const setAsDone = (event) => {
-  
-}
 
 // function allButtons(event) {
 //   const { target } = event;

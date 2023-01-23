@@ -157,30 +157,6 @@
   right: 15px;
 }
 
-.create-imp {
-  border: 3px dotted black;
-  width: 120px;
-  height: 100px;
-  border-radius: 10px;
-  margin-left: 20px;
-  margin-top: 10px;
-  position: relative;
-  display: none;
-}
-
-.create-imp img {
-  position: absolute;
-  top: 35%;
-  left: 5px;
-}
-
-.create-imp p {
-  margin-top: 50px;
-  position: absolute;
-  bottom: 20px;
-  left: 35px;
-}
-
 .tick-icon {
   width: 20px;
   height: 20px;
@@ -207,8 +183,7 @@
 
 .delete-icon:hover,
 .tick-icon:hover,
-.edit-icon:hover,
-.important-button:hover {
+.edit-icon:hover {
   cursor: pointer;
 }
 
@@ -222,8 +197,7 @@
   left: 38px;
 }
 
-.create:hover,
-.create-imp:hover {
+.create:hover {
   box-shadow: 0px 0px 12px 0px #000000;
   cursor: pointer;
 }
@@ -383,26 +357,6 @@
   background-color: var(--body);
 }
 
-.important {
-  color: white;
-  font-size: 2em;
-  transform: rotate(120deg);
-  -webkit-text-stroke: 1px orangered;
-  pointer-events: none;
-}
-
-.important-button {
-  position: absolute;
-  top: -15px;
-  left: -10px;
-  border: none;
-  background-color: transparent;
-}
-
-.important:hover {
-  cursor: pointer;
-}
-
 .selected-task {
   border-left: 5px double black;
   background-color: var(--special) !important;
@@ -421,13 +375,6 @@
 
 .done-item input {
     text-decoration: line-through;
-}
-
-.important-item {
-    background-color: var(--special);
-}
-.important-item p{
-    color: orangered;
 }
 @media only screen and (max-width: 768px) {
   #container {
