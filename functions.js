@@ -10,6 +10,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   todoContainer.id = todoId ? todoId : `item-${counter}`;
   const textarea = buildElement("input", "task");
   textarea.value = todoText ? todoText : "new todo";
+  console.log(todoText);
   textarea.readOnly = true;
   textarea.addEventListener("focusout", () => {
     textarea.readOnly = true;
@@ -24,9 +25,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
   todoContainer.appendChild(doneButton);
   doneButton.appendChild(doneImg);
-  doneButton.addEventListener("click", setAsDone = (event) => {
-    
-  });
+  doneButton.addEventListener("click", sss);
   
   //delete button
   const deleteButton = buildElement("button", "delete-icon");
@@ -34,6 +33,18 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   deleteImg.src = "https://img.icons8.com/color/23/000000/cancel--v3.png";
   todoContainer.appendChild(deleteButton);
   deleteButton.appendChild(deleteImg);
+  deleteButton.addEventListener("click", (event) => {
+    const {target} = event;
+    const targeID = target.parentNode.id;
+    let items = JSON.parse(localStorage.getItem("items"));
+    items.find(element => {
+      element.id === targeID;
+      items.pop(element);
+    });
+    items = JSON.stringify(items);
+    localStorage.setItem("items", items);
+    target.parentNode.remove();
+  });
 
   //edit button
   const editButton = buildElement("button", "edit-icon");
@@ -43,10 +54,10 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   editButton.appendChild(editImg);
 
   //adding client-side database
-  if (oldTodo) {
-    return;
-  }
-  else {
+  // if (oldTodo) {
+  //   return;
+  // }
+  // else {
     const newTodo = {
       value: textarea.value,
       done: false,
@@ -61,7 +72,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
       const jsonNewTodo = JSON.stringify(newTodo);
       localStorage.setItem("items", `[${jsonNewTodo}]`);
     }
-  }
+  //}
 }
 
 function changeContent(event) {
@@ -80,10 +91,12 @@ const buildElement = (element, cssClass) => {
 }
 
 const createNewTodo = document.querySelector(".create");
-createNewTodo.addEventListener("click", createTodo);
+createNewTodo.addEventListener("click", () => {
+  createTodo();
+});
 
 const setAsDone = (event) => {
-  const {target} = event.target;
+  
 }
 
 // function allButtons(event) {
