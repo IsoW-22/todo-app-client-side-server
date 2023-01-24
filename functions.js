@@ -20,6 +20,20 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   todoContainer.appendChild(textarea);
   body.insertBefore(todoContainer, createButton);
 
+  //edit button
+  const editButton = buildElement("button", "edit-icon");
+  const editImg = buildElement("img");
+  editImg.src = "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
+  todoContainer.appendChild(editButton);
+  editButton.appendChild(editImg);
+  editButton.addEventListener("click", (event) => {
+    const {target} = event;
+    const input = target.parentNode.querySelector(".task");
+    input.value = "";
+    input.readOnly = false;
+    input.focus();
+  })
+
   // done button
   const doneButton = buildElement("button", "tick-icon");
   const doneImg = buildElement("img");
@@ -56,6 +70,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
       parent.querySelector(".edit-icon").disabled = true;
     }
   });
+  if(doneCheck) doneButton.click();
   
   //delete button
   const deleteButton = buildElement("button", "delete-icon");
@@ -72,20 +87,6 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
     localStorage.setItem("items", filtered);
     target.parentNode.remove();
   });
-
-  //edit button
-  const editButton = buildElement("button", "edit-icon");
-  const editImg = buildElement("img");
-  editImg.src = "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
-  todoContainer.appendChild(editButton);
-  editButton.appendChild(editImg);
-  editButton.addEventListener("click", (event) => {
-    const {target} = event;
-    const input = target.parentNode.querySelector(".task");
-    input.value = "";
-    input.readOnly = false;
-    input.focus();
-  })
 
   //adding client-side database
   if (oldTodo) {
@@ -109,14 +110,6 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   }
 }
 
-function changeContent(event) {
-  const target = event.target;
-  target.readOnly = true;
-  if (target.value === "" || target.value === null) {
-    target.value = "new task";
-  }
-}
-
 const buildElement = (element, cssClass) => {
   const newElement = document.createElement(element);
   if(cssClass)
@@ -136,3 +129,35 @@ if(checkLocal !== "[]" || checkLocal !== null) {
     createTodo(element.value, element.done, element.id, true);
   });
 }
+
+
+//showing all todos
+const allTodoSelect = () => {
+  const todosInPage = document.querySelectorAll(".items .todo-item");
+  todosInPage.forEach(element => {
+    element.style.display = "block";
+  })
+}
+
+const allTodos = document.querySelector(".all");
+allTodos.addEventListener("click", allTodoSelect);
+
+//showing active todos
+const activeTodoSelect = () => {
+  const todosInStorage = JSON.parse(localStorage.getItem("items"));
+  const todosInPage = document.querySelectorAll(".items .todo-item");
+  const filteredITems = todosInStorage.filter(function(el) { return el.done !== true; });
+  todosInPage.forEach(element => {
+    element.style.display = "none";
+  })
+  for(let i = 0; i < todosInPage.length; i++) {
+    for(let j = 0; j < filteredITems.length; j++) {
+      if(todosInPage[i].id === filteredITems[j].id) {
+        todosInPage[i].style.display = "block";
+      }
+    }
+  }
+}
+
+const activeTodos = document.querySelector(".active");
+activeTodos.addEventListener("click", activeTodoSelect);
