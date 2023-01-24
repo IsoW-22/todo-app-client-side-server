@@ -137,6 +137,7 @@ const allTodoSelect = () => {
   todosInPage.forEach(element => {
     element.style.display = "block";
   })
+  changeSelectedStyle(".all");
 }
 
 const allTodos = document.querySelector(".all");
@@ -157,7 +158,43 @@ const activeTodoSelect = () => {
       }
     }
   }
+  //for select style change
+  changeSelectedStyle(".active");
 }
 
 const activeTodos = document.querySelector(".active");
 activeTodos.addEventListener("click", activeTodoSelect);
+
+//showing done todos
+const doneTodoSelect = () => {
+  const todosInStorage = JSON.parse(localStorage.getItem("items"));
+  const todosInPage = document.querySelectorAll(".items .todo-item");
+  const filteredITems = todosInStorage.filter(function(el) { return el.done !== false; });
+  todosInPage.forEach(element => {
+    element.style.display = "none";
+  })
+  for(let i = 0; i < todosInPage.length; i++) {
+    for(let j = 0; j < filteredITems.length; j++) {
+      if(todosInPage[i].id === filteredITems[j].id) {
+        todosInPage[i].style.display = "block";
+      }
+    }
+  }
+  //for select style change
+  changeSelectedStyle(".completed");
+}
+
+const doneTodos = document.querySelector(".completed");
+doneTodos.addEventListener("click", doneTodoSelect);
+
+//for style change
+const changeSelectedStyle = (selected) => {
+  const allLists = document.querySelectorAll(".new-ul li");
+  allLists.forEach(element => {
+    element.classList.remove("selected-task");
+  })
+  const selectedList = document.querySelector(selected);
+  if(!selectedList.classList.contains("selected-task")){
+    selectedList.classList.toggle("selected-task");
+  }
+}
