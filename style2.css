@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 20% 80%;
+    grid-template-columns: 25% 75%;
+    grid-template-areas: 
+    "nav article"
+    "nav article";
+}
+
+nav {
+    background-color: brown;
+    grid-area: nav;
+}
+
+article {
+    background-color: aqua;
+    grid-area: article;
+}
+
+header {
+    display: none;
+    background-color: blue;
+    grid-area: header;
+}
