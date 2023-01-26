@@ -1,471 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Solitreo&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-:root {
-  --font: "Courgette", cursive;
-  --font2: "Dancing Script", cursive;
-  --header: #757780;
-  --body: #fffffc;
-  --items: #98ce00;
-  --text-white: #fff;
-  --text-black: #000;
-  --special: #6ccff6;
-  --lists: #001011;
-}
-
-[disabled] {
-  opacity: 0.2;
-  pointer-events: none;
+  overflow: hidden;
+  font-family: "Solitreo", cursive;
 }
 
 #container {
-  height: 100vh;
-  min-height: 300px;
+  position: relative;
   width: 100vw;
-  display: grid;
-  grid-template-rows: 110px auto;
-  grid-template-columns: 250px auto;
-  grid-template-areas:
-    "nav header"
-    "nav content";
-  position: relative;
+  height: 100vh;
 }
 
-#nav {
-  grid-area: nav;
-  background-color: var(--body);
-  overflow: auto;
-}
-
-#header {
-  grid-area: header;
-  background-color: var(--header);
-  display: flex;
-  position: relative;
-}
-
-.background-less {
-  width: 200px;
+nav {
   height: 100%;
+  width: 0;
+  position: fixed;
+  background-color: brown;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  background-color: rgb(42, 41, 41);
+  font-size: 1.65rem;
+}
+ul {
+  padding-left: 10px;
+  margin-top: 30px;
+}
+li {
+  margin-top: 20px;
+  color: rgb(116, 116, 116);
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  width: 250px;
+}
+li:hover {
+  color: #fff;
+}
+.selected-task {
+  color: #fff !important;
 }
 
-.for-background {
-  width: 80%;
-  height: 100%;
-  background-image: url("man.png");
-  background-size: contain;
+article {
+  background-image: url("todo.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-}
-
-.welcome p {
-  color: var(--text-white);
-  margin-right: 30px;
-  margin-left: 20px;
-  line-height: 25px;
-  font-family: var(--font);
-  font-size: 20px;
-  text-align: center;
-}
-
-[id*="content"] {
   width: 100%;
   height: 100%;
-  position: absolute;
-  grid-area: content;
-  background-color: var(--body);
-  font-family: var(--font);
-  padding-top: 20px;
-  overflow: auto;
-}
-
-.items {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.list-name {
-  font-size: 1.5em;
-  text-align: center;
-  margin-top: 15px;
-  color: rgba(0, 0, 0, 0.6);
-  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
-    0px -5px 35px rgba(255, 255, 255, 0.3);
-  font-family: var(--font);
-  color: var(--text-white);
-}
-
-.todo-item {
   position: relative;
-  padding-top: 15px;
-  width: 100px;
-  height: 100px;
-  background-color: var(--items);
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  box-shadow: 0px 0px 12px 0px #000000;
-  margin-left: 22px;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
-
-.task {
-  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
-    0px 18px 23px rgba(0, 0, 0, 0.1);
-  color: var(--text-black);
-  font-size: 1em;
-  font-family: var(--font);
-  background-color: transparent;
-  text-align: center;
-  width: 90%;
-  height: 30%;
-  border: none;
-}
-
 .items img {
   pointer-events: none;
 }
 
-.pointer:hover {
+span {
   cursor: pointer;
 }
 
-.create {
-  border: 3px dotted black;
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  margin-left: 20px;
-  margin-top: 10px;
-  position: relative;
-}
-
-.create img {
-  position: absolute;
-  top: 35%;
-  left: 5px;
-}
-
-.create p {
-  margin-top: 50px;
-  position: absolute;
-  bottom: 37px;
-  right: 15px;
-}
-
-.tick-icon {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: transparent;
-  border: none;
-}
-
-.list-item {
-  position: relative;
-}
-
-.delete-icon {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: transparent;
-  border: none;
-}
-
-.delete-icon:hover,
-.tick-icon:hover,
-.edit-icon:hover {
-  cursor: pointer;
-}
-
-.edit-icon {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  background-color: transparent;
-  border: none;
-  bottom: 11px;
-  left: 38px;
-}
-
-.create:hover {
-  box-shadow: 0px 0px 12px 0px #000000;
-  cursor: pointer;
-}
-
-.dateAndDay {
-  margin-left: 15px;
-}
-
-.current-part p {
-  margin-top: 5px;
-  font-size: 1.3em;
-  color: var(--special);
-  font-family: var(--font);
-}
-
-#date {
-  margin-top: 5px;
-  font-size: 1em;
-  font-family: var(--font);
-  color: var(--text-white);
-}
-
-.upper-nav {
-  height: 110px;
-  width: 100%;
-  background-image: url("newpic.jpg");
-  background-size: cover;
-}
-
-.welcome-small p {
-  color: var(--text-white);
-  margin-left: 20px;
-  line-height: 25px;
-  font-family: var(--font);
-  font-size: 1.5em;
-  text-shadow: 3px 0px 7px rgba(81, 67, 21, 0.8),
-    -3px 0px 7px rgba(81, 67, 21, 0.8), 0px 4px 7px rgba(81, 67, 21, 0.8);
-}
-
-.empty {
-  width: 100%;
-  height: 20px;
-}
-
-.new-ul {
-  display: flex;
-  list-style-type: none;
-  flex-direction: column;
-}
-
-.new-ul li {
-  width: 100%;
-  background-color: var(--lists);
-  height: 50px;
-  font-family: var(--font);
-  margin-bottom: 1px;
-  font-size: 1.1em;
-  padding-top: 15px;
-  color: var(--text-white);
-}
-
-.new-ul li:hover {
-  background-color: var(--items);
-  color: var(--text-black);
-  cursor: pointer;
-}
-
-.new-ul li p {
-  display: inline;
+[disabled] {
+  opacity: 0.2 !important;
   pointer-events: none;
 }
 
-.sun {
-  margin-left: 15px;
+.open-menu {
+  color: #000;
+  font-size: 30px;
+  margin-left: 10px;
 }
-
-.star {
-  margin-left: 15px;
+.create {
+  margin-left: 45px;
+  display: inline-block;
+  font-size: 1.3rem;
 }
-
-.lists ul {
+.create button {
+  background-color: rgb(72, 72, 72);
+  border: none;
+  color: #fff;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+.create button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.items {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   width: 100%;
+  justify-content: space-around;
 }
-
-.lists ul li {
-  background-color: var(--header);
+.todo-item {
+  margin-top: 3px;
+  padding: 5px;
+  width: 44%;
+  display: grid;
+  grid-template-columns: 27% 27% 27%;
+  grid-template-rows: 50% 50%;
+  grid-template-areas:
+    "task task task"
+    "done edit delete";
+  background-color: rgba(0, 0, 0, 0.55);
+  justify-content: space-between;
+}
+.todo-item button {
+  border: none;
+  height: 35px;
+  opacity: 1;
+  transition: 0.5s;
+}
+.todo-item button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.task {
+  outline: none;
   width: 100%;
-  height: 50px;
-  padding-top: 12px;
-  color: var(--text-black);
-  font-family: var(--font2);
-  font-size: 1.3em;
-  padding-left: 28px;
-  margin-bottom: 1px;
-}
-
-.list {
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid red;
   display: block;
+  grid-area: task;
+  transition: 1s linear;
+  height: 33px;
+  font-size: 1.1rem;
 }
-
-.list2 {
-  display: none;
+.task:focus {
+  outline: 1px solid red;
+  border: none;
 }
-
-.menu {
-  display: none;
-  width: 40px;
-  height: 40px;
-  padding: 5px 0 0 3px;
+.delete-icon {
+  grid-area: delete;
+  background-color: rgb(243, 93, 93);
 }
-
-.menu:hover {
-  background-color: var(--body);
+.tick-icon {
+  grid-area: done;
+  background-color: rgb(67, 255, 73);
 }
-
-.create-list {
-  position: relative;
-  padding-left: 30px !important;
-}
-
-.create-list:hover {
-  cursor: pointer;
-}
-
-.create-list img {
-  position: absolute;
-  left: 5px;
-  top: 15px;
-}
-
-.delete-list {
-  position: absolute;
-  top: 15px;
-  left: 2px;
-}
-
-.delete-list:hover {
-  cursor: pointer;
-}
-
-.welcome-small {
-  padding-top: 35px;
-}
-
-.back {
-  width: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: none;
-  position: absolute;
-}
-
-.back:hover {
-  background-color: var(--body);
-}
-
-.selected-task {
-  border-left: 5px double black;
-  background-color: var(--special) !important;
-  color: var(--text-black) !important;
-}
-
-.selected-list {
-  border-left: 5px groove rgb(236, 8, 84);
-  background-color: var(--lists) !important;
-  color: var(--text-white) !important;
-}
-
-.done-item {
-    background-color: green !important;
+.edit-icon {
+  grid: edit;
+  background-color: rgb(240, 240, 76);
 }
 
 .done-item input {
-    text-decoration: line-through;
+  background-color: rgb(64, 218, 64);
+  text-decoration: line-through;
 }
-@media only screen and (max-width: 768px) {
-  #container {
-    grid-template-columns: minmax(150px, 30%) auto;
+
+#date {
+  color: #fff;
+  display: block;
+  margin-left: 10px;
+  font-size: 2rem;
+}
+
+.welcome {
+  margin-left: 45px;
+  font-size: 2rem;
+  width: 250px;
+}
+
+.close-menu {
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+@media only screen and (max-width: 720px) {
+  article {
+    overflow: auto;
   }
 
-  .list {
-    display: none;
-  }
-
-  .list-name p {
-    display: block;
-    text-align: center;
-  }
-
-  .dateAndDay {
-    position: absolute;
-  }
-
-  .font-change img,
-  .theme-change {
-    width: 30px;
-    height: 30px;
-  }
-
-  .theme-change {
-    top: 0px;
-  }
-
-  .list2 {
-    display: block;
-  }
-
-  .list-name {
-    color: var(--text-black);
-    margin-bottom: 5px;
-    margin-top: 0;
+  .welcome-create-bundle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 30px;
   }
 
   .todo-item {
-    margin-left: 18px;
-  }
-
-  .new-ul li {
-    height: 50px;
-    padding-top: 15px;
-    font-size: 1em;
-  }
-
-  .hide {
-    display: block;
+    width: 88%;
   }
 }
-
-@media only screen and (max-width: 600px) {
-  #container {
-    grid-template-columns: 100%;
-    grid-template-areas:
-      "header"
-      "content";
-  }
-
-  .menu {
-    display: block;
-  }
-
-  .list-name p {
-    display: block;
-    text-align: center;
-  }
-
-  #nav {
-    position: fixed;
-    height: 100%;
-    width: 0;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    transition: all 0.25s linear;
-  }
-
-  .back {
-    display: block;
-  }
-
-  .todo-item {
-    margin-left: 20px !important;
-  }
-
-  .hide {
-    display: none;
-    color: rgb(236, 8, 84);
-  }
+@media only screen and (max-width: 480px) {
+    article {
+        background-image: url("todo-small.jpg");
+    }
 }

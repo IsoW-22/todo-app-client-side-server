@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,86 +17,36 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
     <div id="container">
-      <!-- ...........................NAVIGATION........................ -->
-      <div id="nav">
-        <div class="hide">
-          <div class="upper-nav">
-            <div class="back">
-              <img src="https://img.icons8.com/nolan/30/back.png" />
+      <nav>
+        <span class="close-menu" onclick="closeMenu()">
+          &times;
+        </span>
+        <span id="date"></span>
+        <ul>
+          <li class="all selected-task">All Todos</li>
+          <li class="active">Active Todos</li>
+          <li class="completed">Completed Todos</li>
+        </ul>
+      </nav>
+      <article>
+        <span class="open-menu" onclick="openMenu()">&#9776;</span>
+        <div class="welcome-create-bundle">
+          <div class="welcome">
+              <p>welcome <span class="pointer user">new user</span></p>
             </div>
-            <div class="welcome-small">
-              <p>welcome</p>
-              <p><span class="pointer user">new user</span></p>
+            <div class="create" id="create">
+              <button>Create new Todo</button>
             </div>
-          </div>
-
-          <div class="lower-nav">
-            <ul class="new-ul">
-              <li class="all selected-task">
-                <span class="sun">❇️</span>
-                <p>All Tasks</p>
-              </li>
-              <li class="active"><span class="sun">▶️</span> Active Tasks</li>
-              <li class="completed">
-                <span class="sun">✅</span> Completed Tasks
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-
-      <!-- ....................HEADER.......................... -->
-
-      <div id="header">
-        <div class="background-less">
-          <div class="menu">
-            <img
-              src="https://img.icons8.com/ios-filled/30/000000/menu--v2.png"
-            />
-          </div>
-          <div class="dateAndDay">
-            <div class="current-part">
-              <p>My Day</p>
-            </div>
-            <div id="date"></div>
-            <div class="list">
-              <p class="list-name">
-                <span class="pointer">Main list</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="for-background">
-          <div style="display: none">
-            <img src="theme.png" alt="theme" class="theme-change" />
-          </div>
-        </div>
-      </div>
-
-      <!-- ,........................CONTENT........................... -->
-
-      <div id="content">
-        <div class="list2">
-          <p class="list-name">
-            <span>Main list</span>
-          </p>
-        </div>
-        <div class="items">
-          <div class="create" id="create">
-            <img
-              src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/25/000000/external-Green-Plus-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"
-            />
-            <p>Create</p>
-          </div>
-        </div>
-      </div>
+        <div class="items"></div>
+      </article>
     </div>
 
     <script src="username.js"></script>
     <script src="date.js"></script>
     <script src="functions.js"></script>
+    <script src="menu.js"></script>
   </body>
 </html>
