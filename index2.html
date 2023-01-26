@@ -19,19 +19,33 @@
   </head>
   <body>
     <div id="container">
-      <header>
-
-      </header>
       <nav>
-
+        <span style="color: #fff;" onclick="closeMenu()">
+          &times;
+        </span>
+        <ul>
+          <li class="all selected-task">All Todos</li>
+          <li class="active">Active Todos</li>
+          <li class="completed">Completed Todos</li>
+        </ul>
       </nav>
       <article>
-
+        <span class="open-menu" onclick="openMenu()">&#9776;</span>
+        <div id="date"></div>
+        <div class="welcome-small">
+          <p>welcome</p>
+          <p><span class="pointer user">new user</span></p>
+        </div>
+        <div class="create" id="create">
+          <button>Create new Todo</button>
+         </div>
+        <div class="items"></div>
       </article>
     </div>
 
     <script src="username.js"></script>
     <script src="date.js"></script>
     <script src="functions.js"></script>
+    <script src="menu.js"></script>
   </body>
 </html>
