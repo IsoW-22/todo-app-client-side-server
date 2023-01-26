@@ -15,6 +15,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
       textarea.value = "new task";
     }
     textarea.readOnly = true;
+    contentChanged(textarea.value, todoContainer.id);
   });
   todoContainer.appendChild(textarea);
   body.appendChild(todoContainer);
@@ -112,6 +113,17 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   }
 }
 
+const contentChanged = (text, id) => {
+  let localStorageItems = JSON.parse(localStorage.getItem("items"));
+  localStorageItems.find(element => {
+    if(element.id === id) {
+      element.value = text;
+    }
+  });
+  localStorageItems = JSON.stringify(localStorageItems);
+  localStorage.setItem("items", localStorageItems);
+}
+
 const buildElement = (element, cssClass) => {
   const newElement = document.createElement(element);
   if(cssClass)
@@ -126,9 +138,10 @@ createNewTodo.addEventListener("click", () => {
 
 //add todo on startup
 const checkLocal = JSON.parse(localStorage.getItem("items"));
-if(checkLocal !== "[]" || checkLocal !== null) {
-  checkLocal.forEach(element => {
-    createTodo(element.value, element.done, element.id, true);
+if(checkLocal !== null)
+  if(checkLocal !== "[]"){
+    checkLocal.forEach(element => {
+      createTodo(element.value, element.done, element.id, true);
   });
 }
 
