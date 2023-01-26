@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="asset/style/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,9 +20,7 @@
   <body>
     <div id="container">
       <nav>
-        <span class="close-menu" onclick="closeMenu()">
-          &times;
-        </span>
+        <span class="close-menu" onclick="closeMenu()"> &times; </span>
         <span id="date"></span>
         <ul>
           <li class="all selected-task">All Todos</li>
@@ -34,19 +32,19 @@
         <span class="open-menu" onclick="openMenu()">&#9776;</span>
         <div class="welcome-create-bundle">
           <div class="welcome">
-              <p>welcome <span class="pointer user">new user</span></p>
-            </div>
-            <div class="create" id="create">
-              <button>Create new Todo</button>
-            </div>
+            <p>welcome <span class="pointer user">new user</span></p>
+          </div>
+          <div class="create" id="create">
+            <button>Create new Todo</button>
+          </div>
         </div>
         <div class="items"></div>
       </article>
     </div>
 
-    <script src="username.js"></script>
-    <script src="date.js"></script>
-    <script src="functions.js"></script>
-    <script src="menu.js"></script>
+    <script src="asset/script/date.js"></script>
+    <script src="asset/script/functions.js"></script>
+    <script src="asset/script/menu.js"></script>
+    <script src="asset/script/username.js"></script>
   </body>
 </html>
