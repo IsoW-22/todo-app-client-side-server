@@ -2,23 +2,22 @@
 
 const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const body = document.querySelector(".items");
-  const createButton = document.getElementById("create");
   const counter = body.childNodes.length - 3;
 
   // input todo
   const todoContainer = buildElement("div", "todo-item");
   todoContainer.id = todoId ? todoId : `item-${counter}`;
   const textarea = buildElement("input", "task");
-  textarea.value = todoText ? todoText : "new task";
-  textarea.readOnly = true;
+  textarea.value = todoText ? todoText : "";
+  textarea.readOnly = todoText? true : false;
   textarea.addEventListener("focusout", () => {
-    if(textarea.value === " " || textarea.value === null){
+    if(textarea.value === " " || textarea.value === null || textarea.value === ""){
       textarea.value = "new task";
     }
     textarea.readOnly = true;
   });
   todoContainer.appendChild(textarea);
-  body.insertBefore(todoContainer, createButton);
+  body.appendChild(todoContainer);
 
   //edit button
   const editButton = buildElement("button", "edit-icon");
@@ -88,6 +87,9 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
     target.parentNode.remove();
   });
 
+  //adding focus after adding element
+  textarea.focus();
+
   //adding client-side database
   if (oldTodo) {
     return;
@@ -135,7 +137,7 @@ if(checkLocal !== "[]" || checkLocal !== null) {
 const allTodoSelect = () => {
   const todosInPage = document.querySelectorAll(".items .todo-item");
   todosInPage.forEach(element => {
-    element.style.display = "block";
+    element.style.display = "grid";
   })
   changeSelectedStyle(".all");
 }
@@ -154,7 +156,7 @@ const activeTodoSelect = () => {
   for(let i = 0; i < todosInPage.length; i++) {
     for(let j = 0; j < filteredITems.length; j++) {
       if(todosInPage[i].id === filteredITems[j].id) {
-        todosInPage[i].style.display = "block";
+        todosInPage[i].style.display = "grid";
       }
     }
   }
@@ -176,7 +178,7 @@ const doneTodoSelect = () => {
   for(let i = 0; i < todosInPage.length; i++) {
     for(let j = 0; j < filteredITems.length; j++) {
       if(todosInPage[i].id === filteredITems[j].id) {
-        todosInPage[i].style.display = "block";
+        todosInPage[i].style.display = "grid";
       }
     }
   }
@@ -189,7 +191,7 @@ doneTodos.addEventListener("click", doneTodoSelect);
 
 //for style change
 const changeSelectedStyle = (selected) => {
-  const allLists = document.querySelectorAll(".new-ul li");
+  const allLists = document.querySelectorAll("ul li");
   allLists.forEach(element => {
     element.classList.remove("selected-task");
   })
