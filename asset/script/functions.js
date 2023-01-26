@@ -29,9 +29,9 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   editButton.addEventListener("click", (event) => {
     const {target} = event;
     const input = target.parentNode.querySelector(".task");
-    input.value = "";
     input.readOnly = false;
     input.focus();
+    input.select();
   })
 
   // done button
