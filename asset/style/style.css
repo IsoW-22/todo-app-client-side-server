@@ -100,8 +100,11 @@ span {
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-around;
+  height: 75%;
+  overflow: auto;
 }
 .todo-item {
+  height: 80px;
   margin-top: 3px;
   padding: 5px;
   width: 44%;
@@ -184,6 +187,10 @@ span {
   right: 10px;
 }
 
+.mobile-create {
+  display: none;
+}
+
 @media only screen and (max-width: 720px) {
   article {
     overflow: auto;
@@ -207,5 +214,24 @@ span {
   }
   .open-menu {
     color: #fff;
+  }
+
+  .big-create{
+    display: none;
+  }
+
+  .mobile-create {
+    width: 100%;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    height: 11%;
+  }
+  .create {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    z-index: 1;
+    margin: 0;
   }
 }

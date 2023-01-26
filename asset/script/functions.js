@@ -131,9 +131,11 @@ const buildElement = (element, cssClass) => {
   return newElement;
 }
 
-const createNewTodo = document.querySelector(".create");
-createNewTodo.addEventListener("click", () => {
-  createTodo();
+const createNewTodo = document.querySelectorAll(".create");
+createNewTodo.forEach(element => {
+  element.addEventListener("click", () => {
+    createTodo();
+  });
 });
 
 //add todo on startup
