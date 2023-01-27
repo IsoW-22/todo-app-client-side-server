@@ -25,4 +25,5 @@ const monthDay = [
 let day = weekday[today.getDay()];
 let month = monthDay[today.getMonth()];
 const day2 = today.getDate();
-document.getElementById("date").innerHTML = `${day}, ${month} ${day2}`;
+document.getElementById("date").innerHTML = `<pre>${day}, 
+${month} ${day2}</pre>`;
