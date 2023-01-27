@@ -25,7 +25,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const editImg = buildElement("img");
   editImg.src = 
   "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-edit-web-flaticons-lineal-color-flat-icons-5.png";
-  //todoContainer.appendChild(editButton);
+  editImg.alt = "edit";
   editButton.appendChild(editImg);
   editButton.addEventListener("click", (event) => {
     const {target} = event;
@@ -40,7 +40,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const doneImg = buildElement("img");
   doneImg.src =
   "https://img.icons8.com/doodle/48/null/checked-checkbox.png";
-  //todoContainer.appendChild(doneButton);
+  doneImg.alt = "done";
   doneButton.appendChild(doneImg);
   doneButton.addEventListener("click", (event) => {
     const {target} = event;
@@ -81,6 +81,7 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const deleteButton = buildElement("button", "delete-icon");
   const deleteImg = buildElement("img");
   deleteImg.src = "https://img.icons8.com/arcade/35/null/close-window.png";
+  deleteImg.alt = "delete"
   todoContainer.appendChild(deleteButton);
   deleteButton.appendChild(deleteImg);
   deleteButton.addEventListener("click", (event) => {
