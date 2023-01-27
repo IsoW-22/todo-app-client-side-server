@@ -23,12 +23,13 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   //edit button
   const editButton = buildElement("button", "edit-icon");
   const editImg = buildElement("img");
-  editImg.src = "https://img.icons8.com/external-flaticons-flat-flat-icons/25/000000/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png";
-  todoContainer.appendChild(editButton);
+  editImg.src = 
+  "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-edit-web-flaticons-lineal-color-flat-icons-5.png";
+  //todoContainer.appendChild(editButton);
   editButton.appendChild(editImg);
   editButton.addEventListener("click", (event) => {
     const {target} = event;
-    const input = target.parentNode.querySelector(".task");
+    const input = target.parentNode.parentNode.querySelector(".task");
     input.readOnly = false;
     input.focus();
     input.select();
@@ -38,12 +39,12 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   const doneButton = buildElement("button", "tick-icon");
   const doneImg = buildElement("img");
   doneImg.src =
-  "https://img.icons8.com/external-others-inmotus-design/20/000000/external-Done-accept-others-inmotus-design-2.png";
-  todoContainer.appendChild(doneButton);
+  "https://img.icons8.com/doodle/48/null/checked-checkbox.png";
+  //todoContainer.appendChild(doneButton);
   doneButton.appendChild(doneImg);
   doneButton.addEventListener("click", (event) => {
     const {target} = event;
-    const parent = target.parentNode;
+    const parent = target.parentNode.parentNode;
     const parentID = parent.id;
     if(parent.classList.contains("done-item")){
       parent.classList.toggle("done-item");
@@ -70,22 +71,26 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
       parent.querySelector(".edit-icon").disabled = true;
     }
   });
+  const doneAndEditContainer = buildElement("div", "done-edit-container");
+  doneAndEditContainer.appendChild(doneButton);
+  doneAndEditContainer.appendChild(editButton);
+  todoContainer.appendChild(doneAndEditContainer);
   if(doneCheck) doneButton.click();
   
   //delete button
   const deleteButton = buildElement("button", "delete-icon");
   const deleteImg = buildElement("img");
-  deleteImg.src = "https://img.icons8.com/color/23/000000/cancel--v3.png";
+  deleteImg.src = "https://img.icons8.com/arcade/35/null/close-window.png";
   todoContainer.appendChild(deleteButton);
   deleteButton.appendChild(deleteImg);
   deleteButton.addEventListener("click", (event) => {
     const {target} = event;
-    const targetID = target.parentNode.id;
+    const targetID = target.parentNode.parentNode.id;
     let items = JSON.parse(localStorage.getItem("items"));
     let filtered = items.filter(function(el) { return el.id != targetID; });
     filtered = JSON.stringify(filtered);
     localStorage.setItem("items", filtered);
-    target.parentNode.remove();
+    target.parentNode.parentNode.remove();
   });
 
   //adding focus after adding element
