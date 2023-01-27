@@ -220,7 +220,7 @@ span {
     background-image: url("../pictures/todo-small.jpg");
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 13% 75% 12%;
+    grid-template-rows: 8% 75% 17%;
     grid-template-areas:
       "upper"
       "items"
@@ -250,5 +250,12 @@ span {
     right: 30px;
     z-index: 1;
     margin: 0;
+  }
+  .open-menu {
+    display: inline-block;
+  }
+  .welcome-create-bundle {
+    display: inline;
+    position: absolute;
   }
 }
