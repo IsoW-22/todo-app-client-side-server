@@ -85,12 +85,12 @@ const createTodo = (todoText, doneCheck, todoId, oldTodo) => {
   deleteButton.appendChild(deleteImg);
   deleteButton.addEventListener("click", (event) => {
     const {target} = event;
-    const targetID = target.parentNode.parentNode.id;
+    const targetID = target.parentNode.id;
     let items = JSON.parse(localStorage.getItem("items"));
     let filtered = items.filter(function(el) { return el.id != targetID; });
     filtered = JSON.stringify(filtered);
     localStorage.setItem("items", filtered);
-    target.parentNode.parentNode.remove();
+    target.parentNode.remove();
   });
 
   //adding focus after adding element
