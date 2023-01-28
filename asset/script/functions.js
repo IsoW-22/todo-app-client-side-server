@@ -158,7 +158,7 @@ if(checkLocal !== null)
 const allTodoSelect = () => {
   const todosInPage = document.querySelectorAll(".items .todo-item");
   todosInPage.forEach(element => {
-    element.style.display = "grid";
+    element.style.display = "flex";
   })
   changeSelectedStyle(".all");
 }
@@ -177,7 +177,7 @@ const activeTodoSelect = () => {
   for(let i = 0; i < todosInPage.length; i++) {
     for(let j = 0; j < filteredITems.length; j++) {
       if(todosInPage[i].id === filteredITems[j].id) {
-        todosInPage[i].style.display = "grid";
+        todosInPage[i].style.display = "flex";
       }
     }
   }
@@ -199,7 +199,7 @@ const doneTodoSelect = () => {
   for(let i = 0; i < todosInPage.length; i++) {
     for(let j = 0; j < filteredITems.length; j++) {
       if(todosInPage[i].id === filteredITems[j].id) {
-        todosInPage[i].style.display = "grid";
+        todosInPage[i].style.display = "flex";
       }
     }
   }
